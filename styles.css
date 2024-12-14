@@ -1,0 +1,373 @@
+/* styles.css */
+
+/* CSS Variables for Theming */
+:root {
+    --background-color: #1e1e2f;
+    --container-bg: #2e2e3e;
+    --header-text-color: #ffffff;
+    --text-color: #e0e0e0;
+    --accent-color: #4caf50;
+    --button-bg: #4caf50;
+    --button-hover-bg: #45a049;
+    --checkbox-bg: #3a3a4f;
+    --checkbox-checked-bg: #4caf50;
+    --tooltip-bg: #333333;
+    --error-color: #ff6b6b;
+    --spinner-border: #4caf50;
+    --result-bg: #3a3a4f;
+    --result-border: #4caf50;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --border-radius: 8px;
+    --transition-duration: 0.3s;
+}
+
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container Styles */
+.container {
+    width: 360px; /* Maintained original width */
+    padding: 15px;
+    background-color: var(--container-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: box-shadow var(--transition-duration);
+}
+
+.container:hover {
+    box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header .icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    /* Ensures icon is visible on dark background */
+}
+
+header h1 {
+    font-size: 20px;
+    color: var(--header-text-color);
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Test Selection Styles */
+.test-selection {
+    background-color: var(--container-bg);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    transition: box-shadow var(--transition-duration);
+}
+
+.test-selection:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.test-selection h2 {
+    font-size: 16px;
+    color: var(--header-text-color);
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.test-selection h2::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent-color);
+    bottom: -5px;
+    left: 0;
+    border-radius: 2px;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Checkbox Styles */
+.checkbox-label {
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    user-select: none;
+    color: var(--text-color);
+    transition: color var(--transition-duration);
+}
+
+.checkbox-label:hover {
+    color: var(--accent-color);
+}
+
+.checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: var(--checkbox-bg);
+    border-radius: 4px;
+    transform: translateY(-50%);
+    transition: background-color var(--transition-duration), box-shadow var(--transition-duration);
+}
+
+.checkbox-label:hover input ~ .checkmark {
+    background-color: var(--accent-color);
+}
+
+.checkbox-label input:checked ~ .checkmark {
+    background-color: var(--checkbox-checked-bg);
+    box-shadow: 0 0 5px var(--accent-color);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-label input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-label .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    animation: checkmark-fade 0.3s ease-in-out;
+}
+
+/* Checkmark Animation */
+@keyframes checkmark-fade {
+    from { opacity: 0; transform: rotate(45deg) scale(0.5); }
+    to { opacity: 1; transform: rotate(45deg) scale(1); }
+}
+
+.label-text {
+    margin-left: 10px;
+}
+
+/* Tooltip Styles */
+.tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--tooltip-bg);
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 110%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity var(--transition-duration);
+    font-size: 14px;
+}
+
+.checkbox-label:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent var(--tooltip-bg) transparent transparent;
+}
+
+/* Button Styles */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--button-bg);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color var(--transition-duration), transform 0.2s, box-shadow var(--transition-duration);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.btn:hover {
+    background-color: var(--button-hover-bg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Loading Indicator Styles */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid var(--spinner-border);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none;
+}
+
+/* Results Section Styles */
+.results-section {
+    background-color: var(--container-bg);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    transition: box-shadow var(--transition-duration);
+}
+
+.results-section:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.results-section h2 {
+    font-size: 16px;
+    color: var(--header-text-color);
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.results-section h2::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent-color);
+    bottom: -5px;
+    left: 0;
+    border-radius: 2px;
+}
+
+.results {
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) var(--container-bg);
+}
+
+/* Custom Scrollbar for Webkit Browsers */
+.results::-webkit-scrollbar {
+    width: 8px;
+}
+
+.results::-webkit-scrollbar-track {
+    background: var(--container-bg);
+    border-radius: 4px;
+}
+
+.results::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    border: 2px solid var(--container-bg);
+}
+
+.result {
+    background-color: #3a3a4f; /* Darker background for results */
+    border-left: 5px solid var(--result-border);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: background-color var(--transition-duration), transform var(--transition-duration);
+}
+
+.result:hover {
+    background-color: #4a4a5a;
+    transform: translateY(-2px);
+}
+
+.result h3 {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: var(--header-text-color);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.result p {
+    margin: 5px 0;
+    font-size: 13px;
+    color: #e0e0e0;
+}
+
+.error {
+    color: var(--error-color);
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid var(--error-color);
+    border-radius: 4px;
+    background-color: rgba(255, 107, 107, 0.1);
+    margin-top: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Error Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

@@ -1,0 +1,70 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Security Scanner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Added Font Weight -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <header>
+        <img src="icons/icon48.png" alt="Scanner Icon" class="icon">
+        <h1>Security Scanner</h1>
+    </header>
+
+    <!-- Test Selection -->
+    <section class="test-selection">
+        <h2>Select Vulnerability Tests</h2>
+        <form id="testsForm">
+            <div class="checkbox-group">
+                <label class="checkbox-label" aria-label="Select SQL Injection Test">
+                    <input type="checkbox" name="tests" value="sqlInjection">
+                    <span class="checkmark"></span>
+                    <span class="label-text">SQL Injection</span>
+                    <span class="tooltip" role="tooltip">Detects vulnerabilities related to SQL Injection.</span>
+                </label>
+
+                <label class="checkbox-label" aria-label="Select Cross-Site Scripting Test">
+                    <input type="checkbox" name="tests" value="xss">
+                    <span class="checkmark"></span>
+                    <span class="label-text">Cross-Site Scripting (XSS)</span>
+                    <span class="tooltip" role="tooltip">Identifies potential XSS vulnerabilities.</span>
+                </label>
+
+                <label class="checkbox-label" aria-label="Select Cross-Site Request Forgery Test">
+                    <input type="checkbox" name="tests" value="csrf">
+                    <span class="checkmark"></span>
+                    <span class="label-text">Cross-Site Request Forgery (CSRF)</span>
+                    <span class="tooltip" role="tooltip">Checks for CSRF protection mechanisms.</span>
+                </label>
+
+                <label class="checkbox-label" aria-label="Select Open Redirect Test">
+                    <input type="checkbox" name="tests" value="openRedirect">
+                    <span class="checkmark"></span>
+                    <span class="label-text">Open Redirect</span>
+                    <span class="tooltip" role="tooltip">Tests for open redirect vulnerabilities.</span>
+                </label>
+            </div>
+        </form>
+        <button id="runTests" class="btn">Run Selected Tests</button>
+    </section>
+
+    <!-- Loading Indicator -->
+    <div id="loading" class="loading hidden" role="status" aria-live="polite">
+        <div class="spinner"></div>
+        <p>Running tests...</p>
+    </div>
+
+    <!-- Results Section -->
+    <section class="results-section">
+        <h2>Results</h2>
+        <div id="results" class="results" aria-live="polite"></div>
+    </section>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
